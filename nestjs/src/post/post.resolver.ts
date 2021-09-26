@@ -1,10 +1,10 @@
 
-import { Post } from './posts.entity';
+import { Post } from './post.entity';
 // import { IPost } from './IPost';
 import { CreatePostDto } from './dto/create-post.dto';
 
 import { ItemInput } from './input-items.input';
-import { PostService } from './posts.service';
+import { PostService } from './post.service';
 import { Resolver, Mutation, Args, Query, ResolveField, Parent } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 @Resolver()
