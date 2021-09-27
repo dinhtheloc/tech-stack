@@ -1,17 +1,12 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver, ResolveField } from '@nestjs/graphql';
 import { ItemInputUser } from './input-items-user.input';
 import { User } from './user.entity';
 import { UserService } from './user.service';
-
-
-
 
 @Resolver(of => User)
 export class UserResolver {
     constructor(
         private readonly userService: UserService,
-
-
     ) { }
 
     // @Query(returns => User)
@@ -20,14 +15,13 @@ export class UserResolver {
     //     return user;
     // }
 
-    // @Mutation(returns => String)
-    // async login(@Args('email') email: string) {
-    //     let user = await this.userService.getUserByEmail(email);
-    //     if (!user) {
-    //         user = await this.userService.createUser(email);
-    //     }
-    //     return this.userService.createToken(user);
-    // }
+    @Mutation(() => String)
+    async login(
+        @Args('email') email: string,
+        @Args('password') password: string
+    ) {
+        return await this.userService.verifyUser(email, password);
+    }
 
 
     @Mutation(returns => User)

@@ -38,6 +38,7 @@ type Query {
 
 type Mutation {
   createPost(input: ItemInput!): Post!
+  login(password: String!, email: String!): String!
   createUser(input: ItemInputUser!): User!
 }
 
@@ -51,7 +52,7 @@ input ItemInput {
 }
 
 input ItemInputUser {
-  fullname: String!
+  fullname: String
   email: String!
-  passwordHash: String!
+  password: String!
 }
