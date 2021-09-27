@@ -3,14 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
-import { PostModule } from './post/post.module';
-import { UserModule } from './user/user.module';
-import { join } from 'path';
+import { ConfigModule } from '@nestjs/config';
+// modules
+import { PostModule } from './modules/post/post.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
     PostModule,
     UserModule,
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',

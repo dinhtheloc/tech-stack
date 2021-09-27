@@ -1,13 +1,13 @@
 
-import { Post } from './post.entity';
-// import { IPost } from './IPost';
-import { CreatePostDto } from './dto/create-post.dto';
-
-import { ItemInput } from './input-items.input';
-import { PostService } from './post.service';
-import { Resolver, Mutation, Args, Query, ResolveField, Parent } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
-@Resolver()
+import { Args, Mutation, Parent, Query, Resolver, ResolveField } from '@nestjs/graphql';
+import { ItemInput } from './input-items.input';
+import { Post } from './post.entity';
+import { User } from '../user/user.entity';
+
+import { PostService } from './post.service';
+
+@Resolver(of => Post)
 export class PostResolver {
     constructor(
         @Inject(PostService) private postService: PostService
@@ -24,11 +24,11 @@ export class PostResolver {
 
     @Query(returns => [Post])
     async posts(): Promise<Post[]> {
-      return await this.postService.findAll();
+        return await this.postService.findAll();
     }
 
-    @Query(() => String)
-    async hello() {
-        return 'hello';
+    @ResolveField()
+    user(@Parent() post: Post): Promise<User> {
+        return this.postService.getUser(post.userId)
     }
 }

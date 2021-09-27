@@ -26,7 +26,7 @@ import {
       const token = auth.split(' ')[1];
   
       try {
-        const decoded = jwt.verify(token, 'secret');
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
         return decoded;
       } catch (err) {
         const message = 'Token error: ' + (err.message || err.name);
