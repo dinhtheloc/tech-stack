@@ -7,17 +7,19 @@ import { ConfigModule } from '@nestjs/config';
 // modules
 import { PostModule } from './modules/post/post.module';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
-    PostModule,
-    UserModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       context: ({ req }) => ({ headers: req.headers }),
     }),
+    PostModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

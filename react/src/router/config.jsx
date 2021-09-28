@@ -13,6 +13,13 @@ export const routes = [
     exact: true,
     private: false,
     fallback: <div> Loading... </div>,
+  },
+  {
+    path: '/login',
+    component: lazy(() => import('../views/login')),
+    exact: false,
+    private: false,
+    fallback: <div> Loading... </div>,
   }
   // {
   //   path: '/admin',
